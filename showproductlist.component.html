@@ -1,0 +1,74 @@
+<html>
+<h4>showproductlist works!<h4>
+<h></h>
+<script>
+    var arr=new Array();
+    function showData(){
+        getdata();
+        var tbl = document.getElementById("myTable");
+
+        var x = tbl.rows.length;
+        while(--x){
+            tbl.deleteRow(x);
+        }
+        // console.log(arr);
+
+        for(i=0;i<arr.length;i++){
+            var r = tbl.insertRow();
+            var cell1= r.insertCell();
+            var cell2= r.insertCell();
+            var cell3= r.insertCell();
+            var cell4= r.insertCell();
+
+            // console.log(arr);
+            // console.log(arr[i].id);
+            // console.log(arr[i].price);
+            // console.log(arr[i].name);
+
+            cell1.innerHTML = arr[i].id;
+            cell2.innerHTML = arr[i].name;
+            cell3.innerHTML = arr[i].price;
+            cell4.innerHTML = arr[i].stock;
+        }
+    }
+    function getdata(){
+    var str=localStorage.getItem("localdata");
+      if(str != null){
+          arr = JSON.parse(str);
+      }
+}
+</script>
+<body>
+    <div style="text-align: center;">
+        <table border=1 id="myTable"> 
+            <tr>
+                <td>ID</td>
+                <td>Name</td>
+                <td>Price</td>
+                <td>Stock</td>
+            </tr>
+        </table>
+   </div>
+   <br><br>
+   <input type="button" onclick="func1()" value="Edit">
+   <br><br>
+   <input type="button" onclick="func2()" value="Delete">
+
+    <script>
+        showData();
+    </script>
+</body>
+<script>
+    function func1(){
+        window.location.href="productlist.component.html";
+    }
+    function func2(){
+        var tbl = document.getElementById("myTable");
+        var x = tbl.rows.length;
+        localStorage.clear();
+        showData();
+        window.location.href="showproductlist.component.html";
+        console.log(localStorage)
+}
+</script>
+</html>

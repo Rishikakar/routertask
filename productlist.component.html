@@ -1,0 +1,57 @@
+<html>
+    <p>productlist works!</p>
+<body>
+    <form action="../showproductlist/showproductlist.component.html">
+        <input type="text" placeholder="ID" id="id" name="id"><br><br>
+        <input type="text" placeholder="NAME" id="name" name="name"><br><br>
+        <input type="text" placeholder="PRICE" id="price" name="price"><br><br>
+        <input type="text" placeholder="STOCK" id="stock" name="stock"><br><br>
+        <input type="button" onclick="func1()" value="SUBMIT" style="height:250px;width:210px">
+      </form>
+</body>
+<style>
+    form{
+    text-align: center;
+}
+</style>
+<script>
+    var arr=new Array();
+    function func1(){
+    // Check browser support
+    if (typeof(Storage) !== "undefined") {
+      // Store
+      var id=document.getElementById("id").value;
+      var name=document.getElementById("name").value;
+      var price=document.getElementById("price").value;
+      var stock=document.getElementById("stock").value;
+    //   console.log(id);
+      getdata();
+      arr.push({
+            id:id,
+            name:name,
+            price:price,
+            stock:stock
+      });
+
+      localStorage.setItem("localdata", JSON.stringify(arr));
+
+    //   localStorage.setItem("ID", id);
+    //   localStorage.setItem("Name", name);
+    //   localStorage.setItem("Price", price);
+    //   localStorage.setItem("Stock", stock);
+    console.log(localStorage);
+    window.location.href="showproductlist.component.html";
+      // Retrieve
+    //   document.getElementById("result").innerHTML = localStorage.getItem("lastname");
+    } else {
+      document.getElementById("result").innerHTML = "Sorry, your browser does not support Web Storage...";
+    }
+}
+function getdata(){
+    var str=localStorage.getItem("localData");
+      if(str != null){
+          arr = JSON.parse(str);
+      }
+}
+    </script>
+</html>
